@@ -7,13 +7,13 @@ import java.util.List;
  */
 public class Individual {
 
-    List<Double> gen;
-    List<Double> fitnessTask;
+    List<Integer> gen;
+    List<Integer> fitnessTask;
     List<Integer> factorial_rank;
     private int skillFactor;
     private double scalarFitness;
 
-    Individual(List<Double> gen, List<Double> fitnessTask) {
+    Individual(List<Integer> gen, List<Integer> fitnessTask) {
         super();
         this.gen = gen;
         this.fitnessTask = fitnessTask;
@@ -27,15 +27,15 @@ public class Individual {
         return min;
     }
 
-    List<Double> getGen() {
+    List<Integer> getGen() {
         return gen;
     }
 
-    List<Double> getFitnessTask() {
+    List<Integer> getFitnessTask() {
         return fitnessTask;
     }
 
-    void setFitnessTask(List<Double> fitnessTask) {
+    void setFitnessTask(List<Integer> fitnessTask) {
         this.fitnessTask = fitnessTask;
     }
 

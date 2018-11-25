@@ -4,26 +4,17 @@ import java.util.List;
 
 abstract public class Task {
     protected int dimension, capacity;
+    int[] givenProblem = {0, 0, 4, 3, 0, 0, 2, 0, 9, 0, 0, 5, 0, 0, 9, 0, 0, 1, 0, 7, 0, 0, 6, 0, 0, 4, 3, 0, 0, 6, 0, 0, 2, 0, 8, 7, 1, 9, 0, 0, 0, 7, 4, 0, 0, 0, 5, 0, 0, 8, 3, 0, 0, 0, 6, 0, 0, 0, 0, 0, 1, 0, 5, 0, 0, 3, 5, 0, 8, 6, 9, 0, 0, 4, 2, 9, 1, 0, 3, 0, 0};
 
-    protected int getStride(List<Double> tx, List<Double> tmp_tx, double[] window) {
-        int stride;
-        if ((tmp_tx.size() - window.length) % (dimension - 1) == 0) {
-            stride = (tmp_tx.size() - window.length) / (dimension - 1);
-        } else {
-            stride = (tmp_tx.size() - window.length) / (dimension - 1) + 1;
-            int zero_padding = (dimension - 1) * stride + window.length - tx.size();
-            for (int i = 0; i < zero_padding; i++) {
-                tmp_tx.add(0.0);
-            }
-        }
-        return stride;
+    public int[] getGivenProblem() {
+        return givenProblem;
     }
 
-    public abstract void makeIndividualVail(List<Double> ind);
+    public void setGivenProblem(int[] givenProblem) {
+        this.givenProblem = givenProblem;
+    }
 
-    public abstract boolean checkIndividualVail(List<Double> ind);
-
-    public abstract Double computeFitness(List<Double> ind);
+    public abstract int computeFitness(List<Integer> ind, int[] givenProblem);
 
     public abstract int getLenGen();
 }

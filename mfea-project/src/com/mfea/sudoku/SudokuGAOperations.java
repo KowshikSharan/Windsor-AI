@@ -276,7 +276,7 @@ public class SudokuGAOperations {
 
         }
 
-        fitness += compareSolWithGiven(randomSolution, givenProblem);
+        fitness += 10*compareSolWithGiven(randomSolution, givenProblem);
         return fitness;
 
 

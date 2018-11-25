@@ -1,6 +1,7 @@
 package com.mfea.ea;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -27,53 +28,41 @@ class Population {
     void init() {
         Random r = new Random();
         individuals = new ArrayList<>();
+        ArrayList<Integer> gene = new ArrayList<>();
+        for (int k = 1; k < 10; k++) {
+            gene.add(new Integer(k));
+        }
 
         for (int i = 0; i < nIndividual; i++) {
-            ArrayList<Double> g = new ArrayList<>();
-            for (int j = 0; j < lenGen; j++) {
-                g.add(r.nextDouble());
-            }
-            if (checkIndividualVail(g))
-                makeIndividualVail(g);
+//            ArrayList<Double> g = new ArrayList<>();
+//            for (int j = 0; j < lenGen; j++) {
+//                g.add(r.nextDouble());
+//            }
 
-            ArrayList<Double> fitnessTa = new ArrayList<>();
+            // create solution
+
+
+            List<Integer> chromosome = new ArrayList<>();
+            for (int j = 0; j < 9; j++) {
+                Collections.shuffle(gene);
+                chromosome.addAll(gene);
+            }
+
+
+//
+//            if (checkIndividualVail(g))
+//                makeIndividualVail(g);
+
+            ArrayList<Integer> fitnessTa = new ArrayList<>();
             for (Task task : tasks) {
-                fitnessTa.add(task.computeFitness(g));
+                fitnessTa.add(task.computeFitness(chromosome, task.getGivenProblem()));
             }
 
-            Individual ind = new Individual(g, fitnessTa);
+            Individual ind = new Individual(chromosome, fitnessTa);
             individuals.add(ind);
         }
 
         updateRankPopulation();
-    }
-
-    boolean checkIndividualVail(ArrayList<Double> ind) {
-        for (Task t : tasks) {
-            if (t.checkIndividualVail(ind)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    void makeIndividualVail(ArrayList<Double> ind) {
-        int i = 0;
-        int xd = 0;
-        while (true) {
-            Task t = tasks.get(i);
-            if (t.checkIndividualVail(ind)) {
-                xd = 0;
-                t.makeIndividualVail(ind);
-            } else {
-                xd++;
-            }
-            if (xd >= tasks.size()) {
-                break;
-            }
-            i = (i + 1) % tasks.size();
-        }
     }
 
     void updateRankPopulation() {
