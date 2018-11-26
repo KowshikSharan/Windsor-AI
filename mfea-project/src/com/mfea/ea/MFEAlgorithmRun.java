@@ -12,7 +12,7 @@ public class MFEAlgorithmRun {
         tasks.add(new SudokuTask(givenProblem1));
         tasks.add(new SudokuTask(givenProblem2));
 
-        MultiTaskingGA g = new MultiTaskingGA(tasks, 1000, 0.6, 50);
+        MultiTaskingGA g = new MultiTaskingGA(tasks, 100, 0.0, 50);
         g.run(50);
     }
 }

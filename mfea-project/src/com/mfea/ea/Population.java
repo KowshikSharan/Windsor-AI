@@ -45,7 +45,29 @@ class Population {
             List<Integer> chromosome = new ArrayList<>();
             for (int j = 0; j < 9; j++) {
                 Collections.shuffle(gene);
-                chromosome.addAll(gene);
+                List<Integer> firstSol =  new ArrayList<>();
+
+                for(int g:gene){
+                    int geneV = g;
+                    firstSol.add(geneV);
+                }
+                Collections.shuffle(gene);
+
+                List<Integer> secondSol =  new ArrayList<>();
+                for(int g:gene){
+                    int geneV = g;
+                    secondSol.add(geneV);
+                }
+
+                List<Integer> chromosomeTemp = new ArrayList<>();
+
+                for (int k = 0; k < 9; k++) {
+                    chromosomeTemp.add(
+                           Integer.parseInt(Integer.toString(firstSol.get(k))+Integer.toString(secondSol.get(k)))
+                    );
+                }
+
+                chromosome.addAll(chromosomeTemp);
             }
 
 
@@ -54,8 +76,11 @@ class Population {
 //                makeIndividualVail(g);
 
             ArrayList<Integer> fitnessTa = new ArrayList<>();
+
+            int index =0;
             for (Task task : tasks) {
-                fitnessTa.add(task.computeFitness(chromosome, task.getGivenProblem()));
+                fitnessTa.add(task.computeFitness(chromosome, task.getGivenProblem(),index));
+                index++;
             }
 
             Individual ind = new Individual(chromosome, fitnessTa);

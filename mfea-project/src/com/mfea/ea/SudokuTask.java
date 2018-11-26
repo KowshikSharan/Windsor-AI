@@ -1,5 +1,6 @@
 package com.mfea.ea;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,11 +27,17 @@ public class SudokuTask extends Task {
     }
 
     @Override
-    public int computeFitness(List<Integer> ind, int[] givenProblem) {
+    public int computeFitness(List<Integer> ind, int[] givenProblem, int index) {
 
         int[] randomSolution = new int[81];
+        List<Integer> current = new ArrayList<>();
+current.clear();
+        for (Integer integerNum : ind) {
+            String number = String.valueOf(integerNum);
+            current.add(Character.getNumericValue(number.charAt(index)));
+        }
 
-        randomSolution = ind.stream().mapToInt(k -> k).toArray();
+        randomSolution = current.stream().mapToInt(k -> k).toArray();
         int fitness = 0;
         int[] boxIndex = {0, 3, 6, 27, 30, 33, 54, 57, 60};
         int[][] sudoku = transformSolution(randomSolution);
@@ -54,7 +61,10 @@ public class SudokuTask extends Task {
         }
 
         fitness += compareSolWithGiven(randomSolution, givenProblem);
-        return fitness;
+        if(fitness == 0){
+            fitness = 1000;
+        }
+        return 1000-fitness;
     }
 
 
@@ -125,7 +135,7 @@ public class SudokuTask extends Task {
         return flag;
     }
 
-    public int getLenGen(){
+    public int getLenGen() {
         return 9;
     }
 }

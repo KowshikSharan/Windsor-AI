@@ -14,7 +14,7 @@ abstract public class Task {
         this.givenProblem = givenProblem;
     }
 
-    public abstract int computeFitness(List<Integer> ind, int[] givenProblem);
+    public abstract int computeFitness(List<Integer> ind, int[] givenProblem,int index);
 
     public abstract int getLenGen();
 }

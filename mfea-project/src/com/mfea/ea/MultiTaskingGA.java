@@ -90,7 +90,7 @@ public class MultiTaskingGA {
             for (int j = 0; j < tasks.size(); j++)
                 if (fT.get(j) == LIMIT) {
                     Task t = tasks.get(j);
-                    fT.set(j, t.computeFitness(child.gen, tasks.get(j).getGivenProblem()));
+                    fT.set(j, t.computeFitness(child.gen, tasks.get(j).getGivenProblem(),j));
                 }
         }
     }
@@ -127,7 +127,7 @@ public class MultiTaskingGA {
             if (i != ind.getSkillFactor())
                 fitnessTa.add(LIMIT);
             else
-                fitnessTa.add(tasks.get(i).computeFitness(ca,tasks.get(i).getGivenProblem()));
+                fitnessTa.add(tasks.get(i).computeFitness(ca,tasks.get(i).getGivenProblem(),i));
 
         ind.setFitnessTask(fitnessTa);
         ind.setFactorial_rank(fR);
@@ -151,7 +151,7 @@ public class MultiTaskingGA {
             if (i != ind2.getSkillFactor())
                 fitnessTa.add(LIMIT);
             else
-                fitnessTa.add(tasks.get(i).computeFitness(cb,tasks.get(i).getGivenProblem()));
+                fitnessTa.add(tasks.get(i).computeFitness(cb,tasks.get(i).getGivenProblem(),i));
 
         ind2.setFitnessTask(fitnessTa);
         ind2.setFactorial_rank(fR);
@@ -185,7 +185,7 @@ public class MultiTaskingGA {
             if (i != ind.getSkillFactor())
                 fitnessTa.add(LIMIT);
             else
-                fitnessTa.add(tasks.get(i).computeFitness(c,tasks.get(i).getGivenProblem()));
+                fitnessTa.add(tasks.get(i).computeFitness(c,tasks.get(i).getGivenProblem(),i));
 
         ind.setFitnessTask(fitnessTa);
         ind.setFactorial_rank(fR);
